@@ -1,6 +1,8 @@
 import express from 'express'
+import swaggerUi from 'swagger-ui-express'
 import { MenuController } from './http/menu-controller'
 import { errorHandler, notFoundHandler } from './http/errors'
+import { openApiDocument } from './http/openapi'
 
 export function createApp(menuController: MenuController) {
   const app = express()
@@ -14,6 +16,11 @@ export function createApp(menuController: MenuController) {
       status: 'ok',
     })
   })
+
+  app.get('/docs.json', (_request, response) => {
+    response.status(200).json(openApiDocument)
+  })
+  app.use('/docs', swaggerUi.serve, swaggerUi.setup(openApiDocument))
 
   const menuRouter = express.Router()
   menuController.register(menuRouter)
