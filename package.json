@@ -1,0 +1,41 @@
+{
+  "name": "entrevista-tecnica",
+  "version": "1.0.0",
+  "description": "Repostório destinado às entrevistas técnicas para os cargos de desenvolvedores e especialistas da [Base39][base39].",
+  "main": "prettier.config.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "tsx watch src/server.ts",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "start": "node dist/src/server.js",
+    "test": "node --import tsx --test tests/**/*.test.ts",
+    "typecheck": "tsc -p tsconfig.test.json --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paketacredito/entrevista-tecnica.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/paketacredito/entrevista-tecnica/issues"
+  },
+  "homepage": "https://github.com/paketacredito/entrevista-tecnica#readme",
+  "dependencies": {
+    "express": "^5.2.1",
+    "mongodb": "^7.5.0",
+    "swagger-ui-express": "^5.0.1",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.2.0",
+    "@types/swagger-ui-express": "^4.1.8",
+    "prettier": "^3.9.6",
+    "tsx": "^4.23.12",
+    "typescript": "^7.0.2"
+  }
+}

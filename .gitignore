@@ -1,9 +1,9 @@
 # VS Code
 .vscode
 
-# Auto-generated
+# Dependencies and build output
 node_modules
-package-lock.json
+dist
 
 # Environment
 .env
