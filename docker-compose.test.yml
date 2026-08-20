@@ -1,0 +1,23 @@
+services:
+  mongodb-test:
+    image: mongo:8.0
+    environment:
+      MONGO_INITDB_DATABASE: menu_api_test
+    healthcheck:
+      test: ['CMD-SHELL', 'mongosh --quiet --eval "db.adminCommand({ ping: 1 }).ok"']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api-test:
+    build:
+      context: .
+      target: development
+    environment:
+      MONGODB_URI: mongodb://mongodb-test:27017
+      MONGODB_DB_NAME: menu_api_test
+      RUN_MONGO_TESTS: '1'
+    command: npm test
+    depends_on:
+      mongodb-test:
+        condition: service_healthy
