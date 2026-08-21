@@ -27,6 +27,10 @@ docker compose up --build
 
 ## Endpoints
 
+### Health
+
+`GET /health` confirma que o processo está ativo.
+
 ### Criar item
 
 `POST /api/v1/menu`
@@ -72,3 +76,5 @@ npm test
 ```
 
 O código é organizado por domínio, casos de uso, portas, infraestrutura e transporte HTTP. O MongoDB mantém cada item em um documento próprio, com índices únicos para `id` e `name` e índice de busca por `relatedId`.
+
+O menu é armazenado como uma lista de itens independentes ligados por `relatedId`. O `GET /api/v1/menu` monta a árvore completa em memória porque o contrato exige o menu inteiro. Para volumes muito grandes, a evolução recomendada é adicionar carregamento incremental de submenus sem alterar esse contrato.
