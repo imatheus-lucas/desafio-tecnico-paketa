@@ -62,4 +62,13 @@ npm run build
 docker compose -f docker-compose.test.yml run --rm api-test
 ```
 
+## Hooks de Git
+
+O Husky executa automaticamente no `pre-commit`:
+
+```bash
+npm run typecheck
+npm test
+```
+
 O código é organizado por domínio, casos de uso, portas, infraestrutura e transporte HTTP. O MongoDB mantém cada item em um documento próprio, com índices únicos para `id` e `name` e índice de busca por `relatedId`.
