@@ -12,7 +12,6 @@ FROM dependencies AS development
 ENV NODE_ENV=development
 COPY tsconfig.json tsconfig.test.json prettier.config.js ./
 COPY src ./src
-COPY tests ./tests
 CMD ["npm", "run", "dev"]
 
 FROM dependencies AS build

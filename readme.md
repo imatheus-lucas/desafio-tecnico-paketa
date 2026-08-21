@@ -9,7 +9,13 @@ npm install
 npm run dev
 ```
 
-Por padrão, a API espera o MongoDB em `mongodb://localhost:27017`, usa o banco `menu_api` e escuta na porta `3000`. Essas configurações podem ser alteradas com `PORT`, `MONGODB_URI` e `MONGODB_DB_NAME`.
+As configurações padrão estão documentadas em `.env.example`. Para personalizá-las, copie o arquivo para `.env`:
+
+```bash
+cp .env.example .env
+```
+
+Os comandos Node carregam primeiro `.env.example` com `--env-file` e, quando existir, aplicam os valores de `.env` com `--env-file-if-exists`. A API espera, por padrão, o MongoDB em `mongodb://localhost:27017`, usa o banco `menu_api` e escuta na porta `3000`.
 
 A documentação interativa está disponível em `http://localhost:3000/docs` e o documento OpenAPI em `http://localhost:3000/docs.json`.
 

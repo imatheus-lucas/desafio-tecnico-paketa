@@ -5,11 +5,11 @@
   "main": "prettier.config.js",
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
-    "dev": "tsx watch src/server.ts",
+    "dev": "node --env-file=.env.example --env-file-if-exists=.env --import tsx --watch src/server.ts",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "start": "node dist/src/server.js",
-    "test": "node --import tsx --test tests/**/*.test.ts",
+    "start": "node --env-file=.env.example --env-file-if-exists=.env dist/src/server.js",
+    "test": "node --env-file=.env.example --env-file-if-exists=.env --import tsx --test tests/**/*.test.ts",
     "typecheck": "tsc -p tsconfig.test.json --noEmit"
   },
   "repository": {
