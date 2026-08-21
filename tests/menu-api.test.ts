@@ -178,6 +178,45 @@ describe('menu API', () => {
     assert.equal(missingParent.status, 404)
   })
 
+  it('rejects invalid payloads and identifiers', async () => {
+    const emptyName = await request('/api/v1/menu', {
+      method: 'POST',
+      body: JSON.stringify({ name: '   ' }),
+    })
+    const unknownField = await request('/api/v1/menu', {
+      method: 'POST',
+      body: JSON.stringify({ name: 'Cabos', extra: true }),
+    })
+    const malformedJson = await request('/api/v1/menu', {
+      method: 'POST',
+      body: '{"name":',
+    })
+    const invalidId = await request('/api/v1/menu/not-an-id', {
+      method: 'DELETE',
+    })
+
+    assert.equal(emptyName.status, 400)
+    assert.equal(unknownField.status, 400)
+    assert.equal(malformedJson.status, 400)
+    assert.equal(invalidId.status, 400)
+  })
+
+  it('allows only one concurrent item with the same name', async () => {
+    const responses = await Promise.all(
+      [1, 2].map(() =>
+        request('/api/v1/menu', {
+          method: 'POST',
+          body: JSON.stringify({ name: 'Concorrente' }),
+        }),
+      ),
+    )
+
+    assert.deepEqual(
+      responses.map(response => response.status).sort((left, right) => left - right),
+      [201, 409],
+    )
+  })
+
   it('deletes an item and its descendants', async () => {
     await request('/api/v1/menu', {
       method: 'POST',
